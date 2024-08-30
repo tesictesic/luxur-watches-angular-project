@@ -4,41 +4,33 @@
        <div class="single_left">
          <div class="labout span_1_of_a1">
          <div class="flexslider">
-                 <img src="../../../../assets/images/satovi/CASIO-EFR-564D-1A.jpg" width="350px" alt="sat"/>
+                 <img [src]="'http://localhost:5244' + product.productPictureSrc" width="350px" alt="sat"/>
                </div>
                <div class="clearfix"></div>	
      </div>
      <div class="cont1 span_2_of_a1 simpleCart_shelfItem">
-             <h1>Duis autem</h1>
-             <p class="availability">Availability: <span class="color">In stock</span></p>
+             <h1>{{product.productName}}</h1>
+             <p class="availability">Gender: <span class="color">{{product.genderName}}</span></p>
              <div class="price_single">
-               <span class="reducedfrom">$140.00</span>
-               <span class="amount item_price actual">$120.00</span><a href="#">click for offer</a>
+               <span class="reducedfrom"></span>
+               <span class="amount item_price actual">${{product.productPrice}}</span><a href="#">click for offer</a>
              </div>
              <h2 class="quick">Quick Overview:</h2>
-             <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
+             <p class="quick_desc"> {{product.brandDescription}}</p>
              <div class="wish-list">
                   <ul>
-                      <li class="wish"><a href="#">Add to Wishlist</a></li>
-                      <li class="compare"><a href="#">Add to Compare</a></li>
+                    <h3>Colors</h3>
+                    @for (item of product.colors; track $index) {
+                      <li class="wish"><a style="color: black;">{{item.name}}</a></li>
+                    }
+                     
                   </ul>
               </div>
-             <ul class="size">
-                 <h3>Length</h3>
-                 <li><a href="#">32</a></li>
-                 <li><a href="#">34</a></li>
-             </ul>
+             
              <div class="quantity_box">
                  <ul class="product-qty">
                     <span>Quantity:</span>
-                    <select>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                    </select>
+                    <input class="form-control" type="number" name="" id="">
                  </ul>
                  <ul class="single_social">
                      <li><a href="#"><i class="fb1"> </i> </a></li>
@@ -62,17 +54,49 @@
              <div  aria-labelledby="tab_item-0">
                  <div class="facts">
                    <ul class="tab_list">
-                       <li><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat</a></li>
-                       <li><a href="#">augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigatione</a></li>
-                       <li><a href="#">claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica</a></li>
-                       <li><a href="#">Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</a></li>
+                       <li><a>{{product.productDescription}}</a></li>
                    </ul>           
                  </div>
               </div>	
               	
            </div>
          </div>
-       </div>	
+       </div>
+       <div class="sap_tabs">	
+        <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+           <ul class="resp-tabs-list">
+                 <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Product Specification</span></li>
+               
+           </ul>				  	 
+           <div class="resp-tabs-container">
+             <div  aria-labelledby="tab_item-0">
+                 <div class="facts">
+                   <ul class="tab_list">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">First</th>
+                          <th scope="col">Last</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (item of product.productSpecifications; track $index) {
+                          <tr>
+                            
+                            <td>{{item.specificationName}}</td>
+                            <td>{{item.specificationValue}}</td>
+                            
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                   </ul>           
+                 </div>
+              </div>	
+              	
+           </div>
+         </div>
+       </div>		
      </div>
   <div class="clearfix"></div>
   <div class="col-md-12">
