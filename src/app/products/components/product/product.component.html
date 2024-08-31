@@ -28,10 +28,10 @@
 		  </ul>
 		 
 		  <h3>Price</h3>
-    	  <ul class="product-categories"><li class="cat-item cat-item-42"><a  [ngClass]="{'dj-t-active':selected_price==='0-100'}" (click)="getParams(null,null,null,'0-100',null)">0$-100$</a></li>
-			<li class="  cat-item cat-item-60"><a  [ngClass]="{'dj-t-active':selected_price==='100-200'}" (click)="getParams(null,null,null,'100-200',null)">100$-200$</a> 
-			<li class="cat-item cat-item-63"><a [ngClass]="{'dj-t-active':selected_price==='300-400'}" (click)="getParams(null,null,null,'300-400',null)">300$-400$</a> 
-			<li class="cat-item cat-item-54"><a [ngClass]="{'dj-t-active':selected_price==='500-0'}" (click)="getParams(null,null,null,'500-0',null)">500$+</a> 
+    	  <ul class="product-categories"><li class="cat-item cat-item-42"><a class="dj-t-cursor"  [ngClass]="{'dj-t-active':selected_price==='0-100'}" (click)="getParams(null,null,null,'0-100',null)">0$-100$</a></li>
+			<li class="cat-item cat-item-60"><a class="dj-t-cursor"  [ngClass]="{'dj-t-active':selected_price==='100-200'}" (click)="getParams(null,null,null,'100-200',null)">100$-200$</a> 
+			<li class="cat-item cat-item-63"><a class="dj-t-cursor" [ngClass]="{'dj-t-active':selected_price==='300-400'}" (click)="getParams(null,null,null,'300-400',null)">300$-400$</a> 
+			<li class="cat-item cat-item-54"><a class="dj-t-cursor" [ngClass]="{'dj-t-active':selected_price==='500-0'}" (click)="getParams(null,null,null,'500-0',null)">500$+</a> 
 			
 		  </ul>
 		</div>
@@ -130,6 +130,7 @@
 					  @for (item of total_pages; track $index) {
 						<li class="page-item {{item==currentPage-1?'active':''}}"><a class="page-link dj-t-cursor" (click)="changePagination(item+1)">{{item+1}}</a></li>
 					  }
+					  
                       
                       
                     </ul>
@@ -139,3 +140,7 @@
       
     </div>
    </div>
+   <div class="col-md-3 dj-t">
+	<app-toast-cart></app-toast-cart>
+   </div>
+   

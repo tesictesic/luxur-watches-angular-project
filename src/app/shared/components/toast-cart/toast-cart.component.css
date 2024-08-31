@@ -1,0 +1,37 @@
+.custom-toast {
+    display: flex;
+    align-items: center;
+    background-color: #F9D9BE; /* Primary color */
+    color: #000;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    border: none;
+    position: fixed;
+    top:3%;
+    right:2%;
+  }
+  
+  .custom-toast-body {
+    flex-grow: 1;
+  }
+  
+  .custom-toast-close {
+    background: transparent;
+    border: none;
+    color: gray;
+    opacity: 1;
+    margin-left: 0.75rem;
+    font-size: 1.45rem;
+  }
+  
+  .custom-toast-close:hover {
+    opacity: 1.5;
+  }
+  
+  .custom-toast .m-auto {
+    margin: auto 0;
+  }
+  .dj-t-none{
+    display: none!important;
+  }
+  

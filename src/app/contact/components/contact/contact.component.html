@@ -33,17 +33,30 @@
  </div>
  <div class="contact_form">
      <h2>Feedback</h2>
-    <form>
+    <form [formGroup]="form">
         <div class="col-md-6 to">
-             <input type="text" class="text" value="Name" >
-             <input type="text" class="text" value="Email">
-             <input type="text" class="text" value="Subject">
+             <input  type="text" class="text" placeholder="Name" formControlName="name" >
+             <div *ngIf="form.get('name').hasError('pattern')">
+                <p class="alert-danger">First Name is not in good format. Example:John</p>
+            </div>
+             <input type="text" class="text" placeholder="Email" formControlName="email">
+             <div *ngIf="form.get('email').hasError('email')">
+                <p class=" alert-danger">Email is not in good format. Example:johngmail.com</p>
+            </div>
+             <input type="text" class="text" placeholder="Subject" formControlName="subject">
+             <div *ngIf="form.get('subject').hasError('minlength')">
+                <p class=" alert-danger">Subject must have min 20 character</p>
+            </div>
         </div>
         <div class="col-md-6 text">
-           <textarea value="Message" >Message</textarea>
+           <textarea placeholder="Message" formControlName="message" >Message</textarea>
+           <div *ngIf="form.get('message').hasError('minlength')">
+            <p class="alert alert-danger">Message must have min 3 character</p>
         </div>
+        </div>
+        
         <div class="clearfix"></div>
-        <div class="but__center"><input type="submit" value="Send message &gt;&gt;"></div>
+        <div class="but__center"><input type="submit" (click)="save()" value="Send message &gt;&gt;"></div>
     </form>
  </div>
 </div>
@@ -51,3 +64,4 @@
 <div class="map">
    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3150859.767904157!2d-96.62081048651531!3d39.536794757966845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1408111832978"> </iframe>
 </div>
+

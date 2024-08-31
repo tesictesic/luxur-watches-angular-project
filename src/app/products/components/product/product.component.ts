@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { ProductServiceService } from '../../../shared/services/product-service.service';
 import { Router } from '@angular/router';
 import { BrandServiceService } from '../../../shared/services/brand-service.service';
 import { GenderServiceService } from '../../../shared/services/gender-service.service';
 import { CartServiceService } from '../../../shared/services/cart-service.service';
 import { CartItem } from '../../../shared/interfaces/cart-item';
+import { CartModalService } from '../../../shared/services/cart-modal.service';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { CartItem } from '../../../shared/interfaces/cart-item';
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit {
+  @ViewChild('.dj-t') myElement!: ElementRef;
   currentPage:number=0;
   params_obj:any={};
   total_pages:number[]=[];
@@ -26,7 +28,8 @@ export class ProductComponent implements OnInit {
     private products:ProductServiceService,
     private brands:BrandServiceService,
     private gender:GenderServiceService,
-    private cart:CartServiceService
+    private cart:CartServiceService,
+    private cart_modal:CartModalService
  ){}
   ngOnInit(): void {
      this.products.getProducts().subscribe({
@@ -173,8 +176,18 @@ export class ProductComponent implements OnInit {
     
    }
    addToCart(item:CartItem){
-    
+    let cart_text="";
     this.cart.addToCart(item);
+    console.log(this.myElement);
+    this.cart.cartText$.subscribe(item=>{
+      cart_text=item;
+    });
+    this.cart_modal.ChangeTextToCart(cart_text);
+    this.cart_modal.ChangeModalStatus(false);
+    setTimeout(()=>{
+      this.cart_modal.ChangeModalStatus(true);
+    },2000)
+    
    }
    
 }
