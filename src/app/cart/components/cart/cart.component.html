@@ -12,75 +12,52 @@
                     <th>Product Name</th>
                     <th class="text-center">Quantity</th>
                     <th class="text-center">Subtotal</th>
-                    <th class="text-center">Discount</th>
                     <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Clear Cart</a></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <div class="product-item">
-                            <a class="product-thumb" href="#"><img src="../../../../assets/images/satovi/CASIO-EFR-564D-1A.jpg" alt="Product"></a>
-                            <div class="product-info">
-                                <h4 class="product-title"><a href="#">Unionbay Park</a></h4><span><em>Size:</em> 10.5</span><span><em>Color:</em> Dark Blue</span>
+                @for (item of cart_items; track $index) {
+                    <tr>
+                        <td>
+                            <div class="product-item">
+                                <a class="product-thumb" href="#"><img [src]="'http://localhost:5244' + item.productPictureSrc" alt="{{item.productPictureSrc}}"></a>
+                                <div class="product-info">
+                                    <h4 class="product-title"><a href="#">{{item.productName}}</a></h4><span><em>Genre:</em>{{item.genderName}}</span><span><em>Colors:</em>
+                                        @for(color of item.colors;track $index){
+                                            @if($last){
+                                                {{color.name}}
+                                            }
+                                            @else{
+                                                {{color.name}},
+                                            }
+                                            
+                                        }
+                                        </span>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <div class="count-input">
-                            <input class="form-control" type="number" name="" id="">
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium">$43.90</td>
-                    <td class="text-center text-lg text-medium">$18.00</td>
-                    <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="product-item">
-                            <a class="product-thumb" href="#"><img src="https://www.bootdey.com/image/220x180/5F9EA0/000000" alt="Product"></a>
-                            <div class="product-info">
-                                <h4 class="product-title"><a href="#">Daily Fabric Cap</a></h4><span><em>Size:</em> XL</span><span><em>Color:</em> Black</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="count-input">
+                                <input class="form-control" type="number" name="quantity" min="1" id="quantity" value="{{item.quantity}}" #qty (change)="changeQuantity(item,qty.value)">
                             </div>
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <div class="count-input">
-                            <input class="form-control" type="number" name="" id="">
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium">$24.89</td>
-                    <td class="text-center">—</td>
-                    <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="product-item">
-                            <a class="product-thumb" href="#"><img src="https://www.bootdey.com/image/220x180/9932CC/000000" alt="Product"></a>
-                            <div class="product-info">
-                                <h4 class="product-title"><a href="#">Cole Haan Crossbody</a></h4><span><em>Size:</em> -</span><span><em>Color:</em> Turquoise</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <div class="count-input">
-                            <input class="form-control" type="number" name="" id="">
-                        </div>
-                    </td>
-                    <td class="text-center text-lg text-medium">$200.00</td>
-                    <td class="text-center">—</td>
-                    <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
-                </tr>
+                        </td>
+                        <td class="text-center text-lg text-medium">${{item.productPrice*item.quantity}}</td>
+                        <td class="text-center"><a class="remove-from-cart dj-t-cursor" (click)="removeItem(item)" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
+                    </tr>
+                }
+                @empty {
+                    <h3>There are no products in cart</h3>
+                }
             </tbody>
         </table>
     </div>
     <div class="shopping-cart-footer">
         
-        <div class="column text-lg">Subtotal: <span class="text-medium">$289.68</span></div>
+        <div class="column text-lg">Subtotal: <span class="text-medium">${{Total}}</span></div>
     </div>
     <div class="shopping-cart-footer">
         <div class="column">
-            <a class="btn btn-primary" href="#" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">Update Cart</a>
+            <a class="btn btn-primary" (click)="removeAll()" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">Remove All</a>
             <a class="btn btn-primary" href="#">Checkout</a></div>
     </div>
 </div>

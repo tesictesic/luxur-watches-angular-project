@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductServiceService } from './services/product-service.service';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,11 +11,13 @@ import { ProductServiceService } from './services/product-service.service';
     CommonModule,
     RouterModule,
     HttpClientModule,
+    FormsModule
   ],
   exports:[
     RouterModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

@@ -228,3 +228,6 @@ select.form-control {
 .form-control-sm:not(textarea) {
     height: 36px;
 }
+.dj-t-cursor{
+    cursor: pointer;
+}

@@ -1,3 +1,9 @@
 label{
     font-weight: normal;
 }
+.dj-t-cursor{
+    cursor: pointer;
+}
+.dj-t-active{
+    color: red;
+}
