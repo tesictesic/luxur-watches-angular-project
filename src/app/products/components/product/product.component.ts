@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { ProductServiceService } from '../../../shared/services/product-service.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BrandServiceService } from '../../../shared/services/brand-service.service';
 import { GenderServiceService } from '../../../shared/services/gender-service.service';
 import { CartServiceService } from '../../../shared/services/cart-service.service';
@@ -29,7 +29,8 @@ export class ProductComponent implements OnInit {
     private brands:BrandServiceService,
     private gender:GenderServiceService,
     private cart:CartServiceService,
-    private cart_modal:CartModalService
+    private cart_modal:CartModalService,
+    private active_route:ActivatedRoute
  ){}
   ngOnInit(): void {
      this.products.getProducts().subscribe({
@@ -62,6 +63,8 @@ export class ProductComponent implements OnInit {
       },
       error:(error)=>{console.log(error);}
      })
+     const currentRoute = this.active_route.snapshot;
+     console.log('Trenutna ruta:', this.router);
      
    }
    redirectToSinglePage(id:number):void{

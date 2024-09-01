@@ -8,7 +8,7 @@ import { ToastCartComponent } from './components/toast-cart/toast-cart.component
 
 @NgModule({
   declarations: [
-    ToastCartComponent
+    ToastCartComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +23,7 @@ import { ToastCartComponent } from './components/toast-cart/toast-cart.component
     CommonModule,
     FormsModule,
     ToastCartComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class SharedModule { }

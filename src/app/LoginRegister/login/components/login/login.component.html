@@ -2,22 +2,30 @@
     <div class="container">
       <h3>Account</h3>
     <div class="col-md-12 account-top">
-      <form>
+      <form [formGroup]="form">
         <div> 	
             <span>Email*</span>
-            <input type="text"> 
+            <input type="text" formControlName="email"> 
+            <div *ngIf="form.get('email').hasError('email')">
+              <p class="alert-danger">Email is not in good format. Example:djordjetesic&#64;gmail.com</p>
+          </div>
         </div>
         <div> 
             <span class="pass">Password*</span>
-            <input type="password">
+            <input type="password" formControlName="password" required>
+           
         </div>				
-            <input type="submit" value="Login"> 
+            <input type="submit" (click)="logIn()" [disabled]="form.invalid" value="Login"> 
        </form>
     </div>
     <div style="margin-top: 20px;">
+      <p>The password must contain at least 8 characters. At least one lowercase, uppercase letter, number and special character</p>
       <p>If you don't have account, please <a style="color:green" routerLink="/register">Register</a></p>
     </div>
-   
+    <div *ngIf="!isDisabledBlock">
+      <p class="alert-danger">Wrong credentials</p>
+  </div>
     <div class="clearfix"> </div>
+
   </div>
 </div>

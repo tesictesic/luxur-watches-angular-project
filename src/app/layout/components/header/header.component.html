@@ -29,14 +29,31 @@
           </div>
           <div class="header_top_right">
             <ul class="header_user_info">
-             <a class="login" routerLink="/login">
-               <i class="user"> </i> 
-               <li class="user_desc">Login</li>
-             </a>
+               @if(isLogged){
+                  <a class="login" (click)="logout()">
+                     <i class="user"> </i> 
+                     <li class="user_desc">Logout</li>
+                   </a>
+               }
+               @else {
+                  <a class="login" routerLink="/login">
+                     <i class="user"> </i> 
+                     <li class="user_desc">Login</li>
+                   </a>
+               }
+             
              <div class="clearfix"> </div>
             </ul>
            <!-- start search-->
-               
+            @if(isLogged){
+               <ul class="header_user_info">
+                  <a class="login" routerLink="/login">
+                   <i class="user"></i> 
+                   <li class="user_desc">{{tokenData.FirstName+" "+tokenData.LastName}}</li>
+                 </a>
+                 </ul>
+            }
+           
                 <!----search-scripts---->
                
                    <!----//search-scripts---->
@@ -48,7 +65,7 @@
       <div class="logo">
          <h1><a routerLink="/home"><span class="m_1">W</span>atches</a></h1>
       </div>
-         <app-navigation></app-navigation>
+         <app-navigation [isLogged]="isLogged"></app-navigation>
            <div class="clearfix"> </div>
            </div>
        </div>
