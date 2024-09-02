@@ -1,47 +1,65 @@
 <div class="account-in">
     <div class="container">
-       <form> 
+       <form [formGroup]="form" enctype="multipart/form-data"> 
       <div class="register-top-grid">
        <h2>PERSONAL INFORMATION</h2>
         <div>
            <span>First Name<label>*</label></span>
-           <input type="text"> 
+           <input type="text" name="first_name" formControlName="first_name"> 
+           <div *ngIf="form.get('first_name')?.hasError('pattern')">
+            <p class="alert-danger">First Name is not in good format.Example:Djordje</p>
+        </div>
         </div>
         <div>
            <span>Last Name<label>*</label></span>
-           <input type="text"> 
+           <input type="text" formControlName="last_name"> 
+           <div *ngIf="form.get('last_name')?.hasError('pattern')">
+            <p class="alert-danger">Last Name is not in good format.Example:Tesic</p>
         </div>
-        <div>
-            <span>Email Address<label>*</label></span>
-            <input type="text"> 
         </div>
+        
         <div>
          <span>Picture<label></label></span>
-         <input type="file"> 
+         <input type="file" formControlName="picture" (change)="insertPicture($event)">
+         <div *ngIf="form.get('picture')?.hasError('pattern')">
+            <p class="alert-danger">Picture is not in good format.Example:jpg,png</p>
+        </div> 
      </div>
      
-        <div class="clearfix"> </div>
+        <div class="clearfix"></div>
           
         </div>
+        <div class="clearfix"></div>
         <div class="register-bottom-grid">
                <h2>LOGIN INFORMATION</h2>
+               <div>
+                  <span>Email Address<label>*</label></span>
+                  <input type="email" formControlName="email"> 
+                  <div *ngIf="form.get('email')?.hasError('email')">
+                     <p class="alert-danger">Email is not in good format.Example:djordjetesic&#64;gmail.com</p>
+                 </div>
+              </div>
                 <div>
                    <span>Password<label>*</label></span>
-                   <input type="password">
+                   <input type="password" formControlName="password">
+                   <div *ngIf="form.get('password')?.hasError('pattern')">
+                     <p class="alert-danger">The password must contain at least 8 characters. At least one lowercase, uppercase letter, number and special character</p>
+                 </div> 
                 </div>
-                <div>
-                   <span>Confirm Password<label>*</label></span>
-                   <input type="password">
-                </div>
+                
                 <div class="clearfix"> </div>
         </div>
+        <div class="register-but">
+     
+         <input type="submit" value="submit" (click)="registration()" [disabled]="form.invalid">
+         <div class="clearfix"> </div>
+     
+  </div>
      </form>
    <div class="clearfix"> </div>
-   <div class="register-but">
-      <form>
-          <input type="submit" value="submit">
-          <div class="clearfix"> </div>
-      </form>
-   </div>
+   @if(isRegistered){
+      <p class="alert-success">You have successfull registered</p>
+   }
+   
   </div>
 </div>

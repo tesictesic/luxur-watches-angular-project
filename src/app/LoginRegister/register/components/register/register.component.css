@@ -1,0 +1,5 @@
+input[disabled] {
+    cursor: default;
+    background-color: rgb(136, 133, 133) !important;
+
+}

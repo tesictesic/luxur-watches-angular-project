@@ -30,7 +30,7 @@
              <div class="quantity_box">
                  <ul class="product-qty">
                     <span>Quantity:</span>
-                    <input class="form-control" type="number" name="" id="">
+                    <input class="form-control" type="number" min="1" value="1" [(ngModel)]="quantity_sing">
                  </ul>
                  <ul class="single_social">
                      <li><a href="#"><i class="fb1"> </i> </a></li>
@@ -40,7 +40,7 @@
                     </ul>
                     <div class="clearfix"></div>
                 </div>
-             <a href="#" class="btn btn-primary btn-normal btn-inline btn_form button item_add item_1" target="_self">Add to cart</a>
+             <a (click)="addToCart(product)" class="btn btn-primary btn-normal btn-inline btn_form button item_add item_1" target="_self">Add to cart</a>
          </div>
          <div class="clearfix"> </div>
      </div>
@@ -147,3 +147,6 @@
   </div>
  </div>
 </div>
+<div class="col-md-3 dj-t">
+	<app-toast-cart></app-toast-cart>
+   </div>

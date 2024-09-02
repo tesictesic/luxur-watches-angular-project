@@ -1,0 +1,113 @@
+<hr>
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="col-sm-10">
+            </div>
+        <div class="col-sm-2">
+            <a  class="pull-right"><img title="profile image" class="img-circle img-responsive" [src]="'http://localhost:5244'+user_data.picturePath"></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+
+            <ul class="list-group">
+                <li class="list-group-item text-muted">Profile</li> 
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Real name</strong></span> {{user_data.firstName+" "+user_data.lastName}}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Email</strong></span> {{user_data.email}}</li>
+
+            </ul>
+        </div>
+        <!--/col-3-->
+        <div class="col-sm-9">
+
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+            </ul>
+            <div class="tab-pane active" id="home">
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date of cart</th>
+                                <th>Cart</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody id="items">
+                            @for (item of cart_array; track $index) {
+                                <tr>
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.createdAt}}</td>
+                                    <td>
+                                        <a (click)="getProductForCart(item.productsCart)">Click</a>
+                                    </td>
+                                    
+                                </tr>
+                            }
+                           
+                            
+                        </tbody>
+                    </table>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4 text-center">
+                            <ul class="pagination" id="myPager"></ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--/tab-pane-->
+        </div>
+        <!--/tab-content-->
+
+    </div>
+    <!--/col-9-->
+</div>
+<div class="modal" [ngClass]="isModalOpen?'dj-t-block':''" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Product Cart</h5>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="items">
+                        @for (item of product_array; track $index) {
+                            <tr>
+                                <td>{{$index+1}}</td>
+                                <td>{{item.productName}}</td>
+                                <td>{{item.quantity}}</td>
+                                
+                            </tr>
+                        }
+                       
+                        
+                    </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 text-center">
+                        <ul class="pagination" id="myPager"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="closeModal()"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

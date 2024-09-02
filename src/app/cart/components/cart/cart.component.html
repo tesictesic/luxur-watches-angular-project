@@ -57,7 +57,12 @@
     </div>
     <div class="shopping-cart-footer">
         <div class="column">
-            <a class="btn btn-primary" (click)="removeAll()" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">Remove All</a>
-            <a class="btn btn-primary" href="#">Checkout</a></div>
+            <button class="btn btn-primary" (click)="removeAll()" [disabled]="cart_items.length==0">Remove All</button>
+            <button class="btn btn-primary" (click)="checkout()" [disabled]="cart_items.length==0 || user==null">Checkout</button></div>
     </div>
+    @if(isSuccessfullCheckout){
+        <p class="alert-success">You have successfull checkout your cart</p>
+    }
+    
 </div>
+

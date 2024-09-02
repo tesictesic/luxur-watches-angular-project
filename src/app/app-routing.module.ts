@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import path from 'path';
 
 const routes: Routes = [
   {
@@ -35,6 +34,10 @@ const routes: Routes = [
   {
     path:"admin-panel",
     loadChildren:()=>import('./admin-panel/admin-panel.module').then(m=>m.AdminPanelModule)
+  },
+  {
+    path:"profile",
+    loadChildren:()=>import('./profile/profile.module').then(m=>m.ProfileModule)
   }
 ];
 
