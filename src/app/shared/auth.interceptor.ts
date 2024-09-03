@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor{
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log(req.url);
-    if((req.url.includes('product')||req.url.includes('gender')||req.url.includes('brand')||req.url.includes('Jwt')||req.url.includes('user'))) return next.handle(req);
+    if((req.url.includes('product')||req.url.includes('gender')||req.url.includes('brand')||req.url.includes('Jwt')||req.url.includes('user')||req.url.includes('contact'))) return next.handle(req);
     else{
       const modificatedRequest=this.modifyRequest(req);
       return next.handle(modificatedRequest);

@@ -7234,6 +7234,9 @@ a.thumbnail.active {
   background-color: #dff0d8;
   border-color: #d6e9c6;
 }
+#page-content-wrapper{
+  width: 50%;
+}
 .alert-success hr {
   border-top-color: #c9e2b3;
 }

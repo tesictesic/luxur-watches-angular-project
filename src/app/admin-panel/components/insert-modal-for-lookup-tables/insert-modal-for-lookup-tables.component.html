@@ -1,0 +1,31 @@
+<div class="modal" [ngClass]="{'dj-t-active':!isDisabled}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Insert</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="form">
+              <div class="form-group">
+                <label for="{{table_text}}">Name:</label>
+               <input type="text" class="form-control" name="{{table_text}}" id="{{table_text}}" formControlName="Name" >
+               <div *ngIf="form.get('Name')?.hasError('minlength')">
+                  <p class="alert alert-danger">Name must have min 3 character</p>
+              </div>
+                @if(table_text=='brand'){
+                  <label for="description">Description:</label>
+               <input type="text" class="form-control" name="description" id="description"  formControlName="Description" >
+               <div *ngIf="form.get('Description')?.hasError('minlength')">
+                <p class="alert alert-danger">Description must have min 10 character</p>
+            </div>
+                }
+              </div>
+            <input type="submit" value="Submit" (click)="save()" [disabled]="form.invalid" />
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

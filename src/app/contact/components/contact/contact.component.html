@@ -45,20 +45,24 @@
             </div>
              <input type="text" class="text" placeholder="Subject" formControlName="subject">
              <div *ngIf="form.get('subject').hasError('minlength')">
-                <p class=" alert-danger">Subject must have min 20 character</p>
+                <p class=" alert-danger">Subject must have min 3 character</p>
             </div>
         </div>
         <div class="col-md-6 text">
-           <textarea placeholder="Message" formControlName="message" >Message</textarea>
-           <div *ngIf="form.get('message').hasError('minlength')">
-            <p class="alert alert-danger">Message must have min 3 character</p>
+           <textarea placeholder="Message" formControlName="body" >Message</textarea>
+           <div *ngIf="form.get('body').hasError('minlength')">
+            <p class="alert alert-danger">Message must have min 20 character</p>
         </div>
         </div>
         
         <div class="clearfix"></div>
-        <div class="but__center"><input type="submit" (click)="save()" value="Send message &gt;&gt;"></div>
+        <div class="but__center"><input type="submit" [disabled]="form.invalid" (click)="save()" value="Send message &gt;&gt;"></div>
     </form>
  </div>
+ @if(isSuccessfullSentContactMessage){
+    <p class="alert alert-success">You have successfull sent contact message. Admin will answer you as soon as posible</p>
+ }
+ 
 </div>
 </div>
 <div class="map">

@@ -1,0 +1,68 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div id="wrapper" class="wrapper-content">
+<div style="display: flex; justify-content: center;">
+    <app-sidebar></app-sidebar>
+<div id="page-content-wrapper">
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Product Dashboard</h1>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Update</th>
+                      <th scope="col">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (item of product_items; track $index) {
+                        <tr>
+                          <th scope="row">{{$index+1}}</th>
+                          <td>{{item.productName}}</td>
+                          <td>
+                            <img [src]="'http://localhost:5244' + item.productPictureSrc" alt="{{item.productPictureSrc}}" width="100px">
+                          </td>
+                          <td>{{item.brandName}}</td>
+                          <td>{{item.genderName}}</td>
+                          <td>{{item.productPrice}}</td>
+                          <td>{{item.productDescription| truncate:30:true}}</td>
+                          <td>
+                            <button class="bg-warning">Update</button>
+                        </td>
+                        <td>
+                            <button class="bg-danger">Deletee</button>
+                        </td>
+                          
+                        </tr>
+                      }
+                      
+                      
+                      
+                    </tbody>
+                  </table>
+            </div>
+            <nav aria-label="...">
+              <ul class="pagination pagination-lg">
+                
+      @for (item of total_pages_arr; track $index) {
+      <li class="page-item {{item==currentPage-1?'active':''}}"><a class="page-link dj-t-cursor" (click)="changePagination(item+1)">{{item+1}}</a></li>
+      }
+      
+                
+                
+              </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,56 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div id="wrapper" class="wrapper-content">
+<div style="display: flex; justify-content: center;">
+    <app-sidebar></app-sidebar>
+<div id="page-content-wrapper">
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Gender Dashhboard</h1>
+                <button class="btn-primary" (click)="insertGender()">Insert</button>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                     
+                      <th scope="col">Update</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                  </thead>
+                    <tbody>
+                      @for (item of gender_arr; track $index) {
+                        <tr>
+                          <th scope="row">{{$index+1}}</th>
+                          <td>{{item.name}}</td>
+                          
+                          <td>
+                              <button class="bg-warning">Update</button>
+                          </td>
+                          <td>
+                              <button class="bg-danger">Delete</button>
+                          </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                  <nav aria-label="...">
+                    <ul class="pagination pagination-lg">
+                      
+					  @for (item of total_pages_arr; track $index) {
+						<li class="page-item {{item==currentPage-1?'active':''}}"><a class="page-link dj-t-cursor" (click)="changePagination(item+1)">{{item+1}}</a></li>
+					  }
+					  
+                      
+                      
+                    </ul>
+                  </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+<app-insert-modal-for-lookup-tables></app-insert-modal-for-lookup-tables>

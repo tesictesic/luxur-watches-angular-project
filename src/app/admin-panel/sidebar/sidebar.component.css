@@ -161,3 +161,6 @@ ul{
   .text-white {
       color: #fff;
   }
+  .active{
+    border-bottom: 1px solid red;
+  }
