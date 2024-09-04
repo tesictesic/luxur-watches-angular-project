@@ -7,9 +7,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AdminLookupTablesService {
 
-  $isDisabled=new BehaviorSubject<boolean>(true);
+  
   $table_name=new BehaviorSubject<string>('');
-  $form_obj=new BehaviorSubject<any>('');
+  $form_obj_insert=new BehaviorSubject<any>('');
+  $form_obj_update=new BehaviorSubject<any>('');
+ 
   constructor(
     private http:HttpClient
   ) { }

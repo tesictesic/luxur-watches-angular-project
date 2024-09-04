@@ -12,31 +12,46 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
+                        <th scope="col">First name</th>
+                        <th scope="col">Last name</th>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                       
-                      </tr>
+                      @for (item of users_arr; track $index) {
+                        <tr>
+                          <th scope="row">{{$index+1}}</th>
+                          <td>{{item.first_Name}}</td>
+                          <td>{{item.last_Name}}</td>
+                          <td>
+                            <img [src]="'http://localhost:5244' + item.picturePath" alt="{{item.picturePath}}" width="70px">
+                          </td>
+                          <td>
+                            <button class="bg-warning">Update</button>
+                        </td>
+                        <td>
+                            <button class="bg-danger">Deletee</button>
+                        </td>
+                          
+                        </tr>
+                      }
+                     
+                     
                     </tbody>
                   </table>
+                  <nav aria-label="...">
+                    <ul class="pagination pagination-lg">
+                      
+					  @for (item of total_pages_arr; track $index) {
+						<li class="page-item {{item==currentPage-1?'active':''}}"><a class="page-link dj-t-cursor" (click)="changePagination(item+1)">{{item+1}}</a></li>
+					  }
+					  
+                      
+                      
+                    </ul>
+                  </nav>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BrandServiceService {
-
+ token:string='';
   constructor(private http:HttpClient) { }
 
   getBrands(page:number|null=null):Observable<any>{
@@ -17,5 +17,24 @@ export class BrandServiceService {
     }
     else
    return this.http.get('http://localhost:5244/api/brand');
+  }
+  postBrand(obj:any):Observable<any>{
+    return this.http.post("http://localhost:5244/api/brand",obj);
+  }
+  deleteBrand(id:number,token:string):Observable<any>{
+    this.token=token;
+    const headers=new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+      'Content-Type': 'application/json'
+    })
+    return this.http.delete("http://localhost:5244/api/brand/"+id,{headers})
+  }
+putBrand(obj:any,token:string){
+  this.token=token
+  const headers=new HttpHeaders({
+    'Authorization': `Bearer ${this.token}`,
+    'Content-Type': 'application/json'
+  })
+  return this.http.put("http://localhost:5244/api/brand/",obj,{headers})
   }
 }

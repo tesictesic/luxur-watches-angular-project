@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -20,4 +20,26 @@ export class GenderServiceService {
     }
     
   }
+  postGender(obj:any,token:string):Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post('http://localhost:5244/api/gender',obj,{headers});
+   }
+   deleteGender(id:number,token:string){
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.delete("http://localhost:5244/api/gender/"+id,{headers})
+   }
+   putGender(obj:any,token:string){
+    const headers=new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    })
+    return this.http.put("http://localhost:5244/api/gender/",obj,{headers})
+    }
 }

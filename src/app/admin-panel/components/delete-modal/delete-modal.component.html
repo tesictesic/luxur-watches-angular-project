@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="deleteModal" class="custom-modal-overlay" [ngClass]="{'dj-t-active':!isDisabled}">
+    <div class="custom-modal-container">
+      <div class="custom-modal-header flex-column">
+        <div class="custom-icon-box">
+          <i class="fa fa-times custom-icon" aria-hidden="true"></i>
+        </div>
+        <h4 class="custom-modal-title w-100">Are you sure?</h4>
+        
+      </div>
+      <div class="custom-modal-body">
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+      </div>
+      <div class="custom-modal-footer justify-content-center">
+        <button type="button" class="custom-btn custom-btn-secondary" (click)="closeModal()">Cancel</button>
+        <button type="button" class="custom-btn custom-btn-danger" (click)="save()">Delete</button>
+      </div>
+    </div>
+  </div>

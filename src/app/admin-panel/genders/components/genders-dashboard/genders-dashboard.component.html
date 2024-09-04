@@ -26,10 +26,10 @@
                           <td>{{item.name}}</td>
                           
                           <td>
-                              <button class="bg-warning">Update</button>
+                              <button class="bg-warning" (click)="updateGender(item.id)">Update</button>
                           </td>
                           <td>
-                              <button class="bg-danger">Delete</button>
+                              <button class="bg-danger" (click)="deleteGender(item.id)">Delete</button>
                           </td>
                         </tr>
                       }
@@ -54,3 +54,5 @@
 
 </div>
 <app-insert-modal-for-lookup-tables></app-insert-modal-for-lookup-tables>
+<app-delete-modal></app-delete-modal>
+<app-toast-cart></app-toast-cart>

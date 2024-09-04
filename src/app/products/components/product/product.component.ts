@@ -189,6 +189,7 @@ export class ProductComponent implements OnInit {
     this.cart_modal.ChangeModalStatus(false);
     setTimeout(()=>{
       this.cart_modal.ChangeModalStatus(true);
+      
     },2000)
     
    }

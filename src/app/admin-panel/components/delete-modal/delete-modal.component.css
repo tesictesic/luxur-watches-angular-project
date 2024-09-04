@@ -1,0 +1,105 @@
+.custom-modal-overlay {		
+    color: #636363;
+    display: none; /* Prikazuje se kad je aktivan modal */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1050;
+    overflow: hidden;
+    outline: 0;
+  }
+  .dj-t-active{
+    display: block !important;
+}
+  .custom-modal-container {
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+    background: white;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  }
+  
+  .custom-modal-header {
+    border-bottom: none;   
+    position: relative;
+  }
+  
+  .custom-modal-title {
+    text-align: center;
+    font-size: 26px;
+  }
+  
+  .custom-close {
+    position: absolute;
+    top: -5px;
+    right: -2px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+  }
+  
+  .custom-modal-body {
+    color: #999;
+  }
+  
+  .custom-modal-footer {
+    border: none;
+    text-align: center;		
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 10px 15px 25px;
+  }
+  
+  .custom-icon-box {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    z-index: 9;
+    text-align: center;
+    border: 3px solid #f15e5e;
+  }
+  
+  .custom-icon {
+    color: #f15e5e;
+    font-size: 46px;
+    display: inline-block;
+    margin-top: 13px;
+  }
+  
+  .custom-btn, .custom-btn:active {
+    color: #fff;
+    border-radius: 4px;
+    background: #60c7c1;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    min-width: 120px;
+    border: none;
+    min-height: 40px;
+    margin: 0 5px;
+  }
+  
+  .custom-btn-secondary {
+    background: #c1c1c1;
+  }
+  
+  .custom-btn-secondary:hover, .custom-btn-secondary:focus {
+    background: #a8a8a8;
+  }
+  
+  .custom-btn-danger {
+    background: #f15e5e;
+  }
+  
+  .custom-btn-danger:hover, .custom-btn-danger:focus {
+    background: #ee3535;
+  }

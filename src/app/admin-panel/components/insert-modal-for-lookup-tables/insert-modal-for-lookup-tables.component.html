@@ -8,20 +8,27 @@
             <form [formGroup]="form">
               <div class="form-group">
                 <label for="{{table_text}}">Name:</label>
-               <input type="text" class="form-control" name="{{table_text}}" id="{{table_text}}" formControlName="Name" >
+               <input type="text" class="form-control" name="{{table_text}}" id="{{table_text}}" formControlName="Name" value="{{obj_update.name!=null ? obj_update.name:''}}"/>
                <div *ngIf="form.get('Name')?.hasError('minlength')">
                   <p class="alert alert-danger">Name must have min 3 character</p>
               </div>
                 @if(table_text=='brand'){
                   <label for="description">Description:</label>
-               <input type="text" class="form-control" name="description" id="description"  formControlName="Description" >
+               <textarea class="form-control" formControlName="Description" name="description" id="description" value="{{obj_update.description!=null? obj_update.description:''}}">
+                
+               </textarea>
                <div *ngIf="form.get('Description')?.hasError('minlength')">
-                <p class="alert alert-danger">Description must have min 10 character</p>
+                <p class="alert alert-danger">Description must have min 20 character</p>
             </div>
                 }
               </div>
-            <input type="submit" value="Submit" (click)="save()" [disabled]="form.invalid" />
+            <input type="submit" value="Submit" (click)="save(this.obj_update.name!=null ? 'update' : 'insert')" [disabled]="form.invalid" />
         </form>
+        @if(errors_array.length>0){
+          @for (item of errors_array; track $index) {
+            <p class="alert alert-danger">{{item.property}} {{item.error}}</p>
+          }
+        }
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" (click)="closeModal()">Close</button>
