@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { ProductServiceService } from '../../../shared/services/product-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BrandServiceService } from '../../../shared/services/brand-service.service';
@@ -6,6 +6,7 @@ import { GenderServiceService } from '../../../shared/services/gender-service.se
 import { CartServiceService } from '../../../shared/services/cart-service.service';
 import { CartItem } from '../../../shared/interfaces/cart-item';
 import { CartModalService } from '../../../shared/services/cart-modal.service';
+import { Brand } from '../../../shared/interfaces/brand';
 
 
 @Component({
@@ -15,11 +16,19 @@ import { CartModalService } from '../../../shared/services/cart-modal.service';
 })
 export class ProductComponent implements OnInit {
   @ViewChild('.dj-t') myElement!: ElementRef;
+  @ViewChildren('brand') brand_chb!: QueryList<ElementRef>;
+  @ViewChildren('gender') gender_chb!: QueryList<ElementRef>;
+  @HostListener('window:beforeunload', ['$event'])
+  
+  clearLocalStorage(event: Event) {
+    // Ukloni određeni ključ iz localStorage
+    localStorage.removeItem('priceFromTo');
+  }
   currentPage:number=0;
   params_obj:any={};
   total_pages:number[]=[];
   product_items:any=[];
-  brand_items:any=[];
+  brand_items:Brand[]=[];
   gender_items:any=[];
   selected_price:string|null=null;
    x:any
@@ -145,15 +154,7 @@ export class ProductComponent implements OnInit {
       }
     }
     console.log(this.params_obj);
-    this.products.getProductsWithParams(this.params_obj).subscribe({
-      next:(data)=>{
-        console.log(data);
-        this.product_items=data.items;
-        this.currentPage=data.currentPage;
-        this.fillInPagination(this.total_pages,data.totalPages);
-      },
-      error:(errors)=>{console.log(errors)}
-    })
+   this.sendParamsGetProducts();
     
     
     console.log(this.params_obj);
@@ -161,7 +162,7 @@ export class ProductComponent implements OnInit {
    CheckPrice(priceFromTo:string|null=null){
     console.log("usao");
     if(priceFromTo){
-      localStorage.setItem('priceFromTo',priceFromTo);
+      
       this.selected_price=priceFromTo;
       let splitted_price=priceFromTo.split("-")
       let price_from=splitted_price[0];
@@ -178,6 +179,23 @@ export class ProductComponent implements OnInit {
     }
     
    }
+   removeParam(type_of_param:string){
+    console.log(type_of_param)
+    if(type_of_param=='brand'){
+      delete this.params_obj.Brand_Id;
+     this.uncheckAllCheckboxes(this.brand_chb)
+    }
+    else if(type_of_param=='gender'){
+      delete this.params_obj.Gender_Id;
+      this.uncheckAllCheckboxes(this.gender_chb);
+    }
+    else{
+      delete this.params_obj.PriceFrom
+      delete this.params_obj.PriceTo
+      this.selected_price=null
+    }
+    this.sendParamsGetProducts();
+   }
    addToCart(item:CartItem){
     let cart_text="";
     this.cart.addToCart(item);
@@ -192,6 +210,24 @@ export class ProductComponent implements OnInit {
       
     },2000)
     
+   }
+   sendParamsGetProducts(){
+    this.products.getProductsWithParams(this.params_obj).subscribe({
+      next:(data)=>{
+        console.log(data);
+        this.product_items=data.items;
+        this.currentPage=data.currentPage;
+        this.fillInPagination(this.total_pages,data.totalPages);
+      },
+      error:(errors)=>{console.log(errors)}
+    })
+   }
+   uncheckAllCheckboxes(chb:QueryList<ElementRef>){
+    chb.forEach((item)=>{
+      if(item.nativeElement.checked) item.nativeElement.checked=false;
+      
+      
+     })
    }
    
 }

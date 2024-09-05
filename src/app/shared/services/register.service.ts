@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Register } from '../interfaces/register';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
    formData:FormData=new FormData();
+   
 
   constructor(
     private http:HttpClient
@@ -28,4 +29,5 @@ export class RegisterService {
   sendData():Observable<any>{
     return this.http.post("http://localhost:5244/api/user",this.formData)
   }
+ 
 }

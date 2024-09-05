@@ -34,6 +34,12 @@ export class AuthService {
     let jwtHelper=new JwtHelperService();
     return jwtHelper.decodeToken(this.token_jwt.token)
   }
+  isLoggedUserAdmin(){
+    let allowed_use_cases_for_user=this.getDataFromJwtToken().AllowedUseCases;
+    let user_use_cases_id_arr=allowed_use_cases_for_user.split(',');
+    let admin_use_cases_id=[2,3,4,5,7,8,9,10,12,13,14,15,16,17,18,19,20,21,28,33];
+    return admin_use_cases_id.some(el=>user_use_cases_id_arr.includes(el.toString()))
+  }
   
 
 

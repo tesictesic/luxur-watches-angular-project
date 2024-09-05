@@ -7,3 +7,27 @@ label{
 .dj-t-active{
     color: red;
 }
+.reset-button {
+    background-color: #ff4d4d; /* Svetlo crvena boja */
+    color: white; /* Tekst bele boje */
+    border: none; /* Bez okvira */
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    border-radius: 5px; /* Zaobljeni uglovi */
+    cursor: pointer; /* Promeni kursor na "pointer" prilikom prelaska */
+    transition: background-color 0.3s ease; /* Animacija prilikom hover-a */
+  }
+  
+  .reset-button:hover {
+    background-color: #e60000; /* Tamnija crvena na hover */
+  }
+  
+  .reset-button:active {
+    background-color: #cc0000; /* Još tamnija crvena kada je kliknuto */
+    transform: scale(0.98); /* Lagano smanjenje prilikom klika */
+  }
+  
+  .reset-button:focus {
+    outline: none; /* Ukloni fokus obrub */
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Dodaj blagi fokus senku */
+  }

@@ -1,0 +1,95 @@
+<div class="modal"  [ngClass]="{'dj-t-active':!isDisabled}"  tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Insert</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="form" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="ProductName">Name:</label>
+               <input type="text" class="form-control" name="ProductName" id="ProductName" formControlName="ProductName" value="{{product!=null? product.productName:''}}"/>
+               <div *ngIf="form.get('ProductName').hasError('minlength')">
+                  <p class="alert alert-danger">Product name must have min 5 character</p>
+              </div> 
+               </div>
+               <div class="form-group">
+                <label for="Image">Picture:</label>
+               <input type="file" class="form-control" name="Image" id="Image"  (change)="getPicture($event)" formControlName="Image" value=""/>
+                <div *ngIf="form.get('Image').hasError('pattern')">
+                  <p class="alert alert-danger">Image is not in good format. Example:jpg,png,jpeg</p>
+              </div> 
+               </div>
+               <div class="form-group">
+                <label for="ProductPrice">ProductPrice:</label>
+               <input type="number" class="form-control" name="ProductPrice" id="ProductPrice" formControlName="ProductPrice" value="{{product!=null? product.productPrice:''}}"/>
+                <div *ngIf="form.get('ProductPrice').hasError('required')">
+                  <p class="alert alert-danger">Product price is required </p>
+              </div> 
+               </div>
+               <div class="form-group">
+                <label for="ProductDescription">Description:</label>
+             <textarea class="form-control" formControlName="ProductDescription" name="ProductDescription" id="ProductDescription" value="{{product!=null? product.productDescription:''}}" >
+             </textarea>
+              <div *ngIf="form.get('ProductDescription').hasError('minlength')">
+              <p class="alert alert-danger">Description must have min 30 character</p>
+          </div> 
+              
+            </div>
+               <div class="form-group">
+                <label for="BrandId">Brand:</label>
+              <select formControlName="BrandId" id="BrandId" name="BrandId" class="form-control">
+                <option value="0">Choose</option>
+                @for (item of brand_arr; track $index) {
+                  <option value="{{item.id}}" [selected]="product!=null&&product.brandName==item.name">{{item.name}}</option>
+                }
+              </select>
+                <div *ngIf="form.get('BrandId').hasError('required')">
+                  <p class="alert alert-danger">Brand is required</p>
+              </div> 
+               </div>
+               <div class="form-group">
+                <label for="GenderId">Gender:</label>
+              <select formControlName="GenderId" id="GenderId" name="GenderId" class="form-control">
+                <option value="0">Choose</option>
+                @for (item of gender_arr; track $index) {
+                  <option value="{{item.id}}" [selected]="product!=null&&product.genderName==item.name">{{item.name}}</option>
+                }
+              </select>
+                <div *ngIf="form.get('GenderId').hasError('required')">
+                  <p class="alert alert-danger">Brand is required</p>
+              </div> 
+               </div>
+               @if(product==null){
+                <div formArrayName="Product_Colors">
+                  <label for="">Color:</label>
+                  <br>
+                  <div *ngFor="let item of color_arr; let i = index">
+                    <div class="form-group">
+                    <input type="checkbox" [checked]="" [formControlName]="item.id" name="{{item.name}}" id="{{item.name}}" value="{{item.id}}"/>
+                    <label for="{{item.name}}">{{item.name}}</label>
+                  </div>
+                </div>
+                  
+                  
+              </div>
+               }
+               
+             
+               
+               
+            <input type="submit" value="Submit" [disabled]="form.invalid"  (click)="save(product!=null?'update':'insert')" />
+        </form>
+        <!-- @if(errors_array.length>0){
+          @for (item of errors_array; track $index) {
+            <p class="alert alert-danger">{{item.property}} {{item.error}}</p>
+          }
+        } -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

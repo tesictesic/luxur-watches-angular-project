@@ -35,7 +35,7 @@
                <div>
                   <span>Email Address<label>*</label></span>
                   <input type="email" formControlName="email"> 
-                  <div *ngIf="form.get('email')?.hasError('email')">
+                  <div *ngIf="form.get('email')?.hasError('pattern')">
                      <p class="alert-danger">Email is not in good format.Example:djordjetesic&#64;gmail.com</p>
                  </div>
               </div>
@@ -59,6 +59,12 @@
    <div class="clearfix"> </div>
    @if(isRegistered){
       <p class="alert-success">You have successfull registered</p>
+   }
+   @if(error!=undefined&&error.length>0){
+      @for (item of error; track $index) {
+         <p class="alert-danger">{{item.error}}</p>
+      }
+
    }
    
   </div>

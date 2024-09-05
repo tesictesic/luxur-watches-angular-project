@@ -8,12 +8,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1>User Dashboard</h1>
+                <button class="bg-primary" (click)="insertUser()">Insert</button>
                 <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">First name</th>
                         <th scope="col">Last name</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Picture</th>
                         <th scope="col">Update</th>
                         <th scope="col">Delete</th>
@@ -25,14 +27,15 @@
                           <th scope="row">{{$index+1}}</th>
                           <td>{{item.first_Name}}</td>
                           <td>{{item.last_Name}}</td>
+                          <td>{{item.email}}</td>
                           <td>
                             <img [src]="'http://localhost:5244' + item.picturePath" alt="{{item.picturePath}}" width="70px">
                           </td>
                           <td>
-                            <button class="bg-warning">Update</button>
+                            <button class="bg-warning" (click)="updateUser(item.id)">Update</button>
                         </td>
                         <td>
-                            <button class="bg-danger">Deletee</button>
+                            <button class="bg-danger" (click)="deleteUser(item.id)">Deletee</button>
                         </td>
                           
                         </tr>
@@ -59,3 +62,6 @@
 </div>
 
 </div>
+<app-insert-update-user-modal></app-insert-update-user-modal>
+<app-delete-modal></app-delete-modal>
+ <app-toast-cart></app-toast-cart>

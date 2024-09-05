@@ -1,0 +1,64 @@
+<div class="modal" [ngClass]="{'dj-t-active':!isDisabled}"  tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Insert</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="form" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="First_Name"> First Name:</label>
+               <input type="text" class="form-control" name="First_Name" id="First_Name" formControlName="First_Name" value="{{user!=null?user.first_Name:''}}"/>
+                <div *ngIf="form.get('First_Name').hasError('pattern')">
+                  <p class="alert alert-danger">First name must have min 3 character</p>
+              </div> 
+              </div>
+              <div class="form-group">
+                <label for="Last_Name"> Last Name:</label>
+               <input type="text" class="form-control" name="Last_Name" id="Last_Name" formControlName="Last_Name" value="{{user!=null?user.last_Name:''}}"/>
+               <div *ngIf="form.get('Last_Name').hasError('pattern')">
+                  <p class="alert alert-danger">Last name must have min 3 character</p>
+              </div> 
+              </div>
+              <div class="form-group">
+                <label for="Email"> Email:</label>
+               <input type="text" class="form-control" name="Email" id="Email" formControlName="Email" value="{{user!=null?user.email:''}}"/>
+                <div *ngIf="form.get('Email').hasError('pattern')">
+                  <p class="alert alert-danger">Email is not in good format</p>
+              </div> 
+              </div>
+             
+                @if(user==null){
+                  <div class="form-group">
+                  <label for="Password"> Password:</label>
+               <input type="password" class="form-control" name="Password" id="Password" formControlName="Password"/>
+                <div *ngIf="form.get('Password').hasError('pattern')">
+                  <p class="alert alert-danger">Password must have minimum eight characters, at least one uppercase letter, one lowercase letter and one number:</p>
+              </div> 
+              <p>Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:</p>
+              </div>
+                }
+                
+              <div class="form-group">
+                <label for=""> Image:</label>
+               <input type="file" class="form-control" name="Image" id="Image" (change)="getPicture($event)" formControlName="Image" value=""/>
+                <div *ngIf="form.get('Image').hasError('pattern')">
+                  <p class="alert alert-danger">Picture is not in good format. Only png,jpg,jpeg</p>
+              </div> 
+              </div>
+            <input type="submit" (click)="save(user!=null?'update':'insert')" [disabled]="form.invalid" value="Submit" />
+        </form>
+         @if(errors_array.length>0){
+          @for (item of errors_array; track $index) {
+            <p class="alert alert-danger">{{item.property}} {{item.error}}</p>
+          }
+        } 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="closeModal()" >Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

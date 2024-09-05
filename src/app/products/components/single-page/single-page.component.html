@@ -4,7 +4,7 @@
        <div class="single_left">
          <div class="labout span_1_of_a1">
          <div class="flexslider">
-                 <img [src]="'http://localhost:5244' + product.productPictureSrc" width="350px" alt="sat"/>
+                 <img [src]="'http://localhost:5244' + product.productPictureSrc" width="350px" alt="{{product.productPictureSrc}}"/>
                </div>
                <div class="clearfix"></div>	
      </div>
@@ -100,49 +100,28 @@
      </div>
   <div class="clearfix"></div>
   <div class="col-md-12">
-    <h3 class="m_1">Related Products</h3>
+    @if(products_related.length>0){
+      
+      <h3 class="m_1">Related Products</h3>
     <div class="wrapper" style="display: flex; justify-content: space-between; align-items: center;">
+      @for (item of products_related; track $index) {
         <ul class="product col-md-3">
-            <li class="product_img"><img src="../../../../assets/images/satovi/CASIO-EFR-564D-1A.jpg" class="img-responsive" alt=""/></li>
-            <li class="product_desc">
-                <h4><a href="#">quod mazim</a></h4>
-                <p class="single_price">$66.30</p>
-                <a href="#" class="link-cart">Add to Wishlist</a>
-                <a href="#" class="link-cart">Add to Cart</a>
-          </li>
-            <div class="clearfix"> </div>
-        </ul>
-        <ul class="product col-md-3">
-            <li class="product_img"><img src="../../../../assets/images/satovi/CASIO-EFR-564D-1A.jpg" class="img-responsive" alt=""/></li>
-            <li class="product_desc">
-                <h4><a href="#">quod mazim</a></h4>
-                <p class="single_price">$66.30</p>
-                <a href="#" class="link-cart">Add to Wishlist</a>
-                <a href="#" class="link-cart">Add to Cart</a>
-          </li>
-            <div class="clearfix"> </div>
-        </ul>
-        <ul class="product col-md-3">
-            <li class="product_img"><img src="../../../../assets/images/satovi/CASIO-EFR-564D-1A.jpg" class="img-responsive" alt=""/></li>
-            <li class="product_desc">
-                <h4><a href="#">quod mazim</a></h4>
-                <p class="single_price">$66.30</p>
-                <a href="#" class="link-cart">Add to Wishlist</a>
-                <a href="#" class="link-cart">Add to Cart</a>
-          </li>
-            <div class="clearfix"> </div>
-        </ul>
-        <ul class="product col-md-3">
-            <li class="product_img"><img src="../../../../assets/images/satovi/CASIO-EFR-564D-1A.jpg" class="img-responsive" alt=""/></li>
-            <li class="product_desc">
-                <h4><a href="#">quod mazim</a></h4>
-                <p class="single_price">$66.30</p>
-                <a href="#" class="link-cart">Add to Wishlist</a>
-                <a href="#" class="link-cart">Add to Cart</a>
-          </li>
-            <div class="clearfix"> </div>
-        </ul>
+          <li class="product_img"><img [src]="'http://localhost:5244' + item.productPictureSrc" class="img-responsive" alt="{{item.productPictureSrc}}"/></li>
+          <li class="product_desc">
+              <h4><a style="cursor: pointer;" (click)="redirectToSinglePage(item.id)">{{item.productName}}</a></h4>
+              <p class="single_price">${{item.productPrice}}</p>
+              <a>Brand: {{item.brandName}}</a>
+              <br>
+              <a>Gender: {{item.genderName}}</a>
+        </li>
+          <div class="clearfix"> </div>
+      </ul>
+      }
+        
+        
     </div>
+    }
+    
     
   </div>
  </div>

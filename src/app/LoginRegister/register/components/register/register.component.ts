@@ -12,6 +12,7 @@ import { error } from 'console';
 export class RegisterComponent {
   picture:File|null=null;
   isRegistered:boolean=false;
+  error:any;
   constructor(
     private register_service:RegisterService
   ){}
@@ -19,7 +20,7 @@ export class RegisterComponent {
  form=new FormGroup({
   first_name:new FormControl(null,[Validators.required,Validators.pattern(/^[A-Z][a-z]{3,}$/)]),
   last_name:new FormControl(null,[Validators.required,Validators.pattern(/^[A-Z][a-z]{3,}$/)]),
-  email:new FormControl(null,[Validators.required,Validators.email]),
+  email:new FormControl(null,[Validators.required,Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)]),
   password:new FormControl(null,[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/)]),
   picture:new FormControl(null,[Validators.pattern(/\.(jpg|jpeg|png)$/i)])
 
@@ -46,7 +47,10 @@ registration(){
       })
       this.isRegistered=true;
   },
-  error=>{console.log(error)}
+  error=>{
+    console.log(error)
+    this.error=error.error;
+  }
 
 )
 }

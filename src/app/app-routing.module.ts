@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path:'',
+    path:"",
     pathMatch:"full",
-    redirectTo:'/home'
+    redirectTo:'home'
   },
   {
     path:"home",
@@ -33,7 +34,9 @@ const routes: Routes = [
   },
   {
     path:"admin-panel",
-    loadChildren:()=>import('./admin-panel/admin-panel.module').then(m=>m.AdminPanelModule)
+    loadChildren:()=>import('./admin-panel/admin-panel.module').then(m=>m.AdminPanelModule),
+    canActivateChild:[AdminGuard]
+    
   },
   {
     path:"profile",

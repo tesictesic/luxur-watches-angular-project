@@ -8,6 +8,7 @@
 			<br/>
     	  <h3>Brand</h3>
     	  <ul class="product-categories color">
+			<button class="reset-button" (click)="removeParam('brand')">None</button>
 			@for (item of brand_items; track $index) {
 				<li class="cat-item cat-item-60">
 					<input type="radio" name="brand" id="{{item.name}}" value="{{item.id}}" #brand  (change)="getParams(null,$event,null,null,null)">
@@ -19,6 +20,7 @@
 		 </ul>
 		  <h3>Gender</h3>
     	  <ul class="product-categories color">
+			<button class="reset-button" (click)="removeParam('gender')">None</button>
 			@for (item of gender_items; track $index) {
 				<li class="cat-item cat-item-60">
 					<input type="radio" name="gender" id="{{item.name}}" value="{{item.id}}" #gender  (change)="getParams(null,null,$event,null,null)">
@@ -28,6 +30,7 @@
 		  </ul>
 		 
 		  <h3>Price</h3>
+		  <button class="reset-button" (click)="removeParam('price')">None</button>
     	  <ul class="product-categories"><li class="cat-item cat-item-42"><a class="dj-t-cursor"  [ngClass]="{'dj-t-active':selected_price==='0-100'}" (click)="getParams(null,null,null,'0-100',null)">0$-100$</a></li>
 			<li class="cat-item cat-item-60"><a class="dj-t-cursor"  [ngClass]="{'dj-t-active':selected_price==='100-200'}" (click)="getParams(null,null,null,'100-200',null)">100$-200$</a> 
 			<li class="cat-item cat-item-63"><a class="dj-t-cursor" [ngClass]="{'dj-t-active':selected_price==='300-400'}" (click)="getParams(null,null,null,'300-400',null)">300$-400$</a> 

@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
    totalCount:number|null=null;
    isLogged:boolean=false;
    tokenData:any
+   isAdmin:boolean=false;
    
   
   constructor(
@@ -31,7 +32,12 @@ export class HeaderComponent implements OnInit {
         this.isLogged = this.auth.isLoggedIn();
       }
        this.tokenData=this.auth.getDataFromJwtToken();
-      console.log(this.tokenData);
+       if(this.tokenData!=null|| this.tokenData!=undefined){
+        this.isAdmin=this.auth.isLoggedUserAdmin();
+        console.log(this.isAdmin);
+       }
+       
+      
     })
     
   }

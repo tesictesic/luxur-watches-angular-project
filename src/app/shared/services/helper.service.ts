@@ -56,5 +56,17 @@ export class HelperService {
     })
     return this.http.put("http://localhost:5244/api/color/",obj,{headers})
     }
+    getContacts(token:string,page:number|null=null):Observable<any>{
+      let params=new HttpParams();
+      const headers=new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      })
+      if(page!=null){
+        
+        params=params.set('page',page);
+      }
+      return this.http.get("http://localhost:5244/api/contact",{params,headers})
+    }
    
 }

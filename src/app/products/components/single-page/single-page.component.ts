@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductServiceService } from '../../../shared/services/product-service.service';
 import { CartServiceService } from '../../../shared/services/cart-service.service';
 import { CartItem } from '../../../shared/interfaces/cart-item';
 import { CartModalService } from '../../../shared/services/cart-modal.service';
+import { Product } from '../../../shared/interfaces/product';
 
 @Component({
   selector: 'app-single-page',
@@ -13,11 +14,13 @@ import { CartModalService } from '../../../shared/services/cart-modal.service';
 export class SinglePageComponent implements OnInit {
     product:any=[];
     quantity_sing:number=1;
+    products_related:Product[]=[];
    constructor(
     private active_route:ActivatedRoute,
     private product_service:ProductServiceService,
     private cart:CartServiceService,
-    private cart_modal:CartModalService
+    private cart_modal:CartModalService,
+    private router:Router
    ){}
    ngOnInit(): void {
         let product_id=this.active_route.snapshot.paramMap.get('id');
@@ -31,6 +34,17 @@ export class SinglePageComponent implements OnInit {
             error(error){console.log(error)}
           })
         }
+        this.product_service.getProducts().subscribe(item=>{
+          
+          this.products_related=item.items;
+           let related_products=this.products_related.filter(y=>y.brandName==this.product.brandName);
+           this.products_related=related_products;
+           let remove_product_this=this.products_related.filter(y=>y.id!=this.product.id);
+           this.products_related=remove_product_this;
+           console.log(remove_product_this);
+          
+          
+        })
       
    }
    addToCart(item:CartItem){
@@ -48,4 +62,9 @@ export class SinglePageComponent implements OnInit {
     },2000)
     
    }
+   redirectToSinglePage(id:number):void{
+    this.router.navigate(['/products']).then(() => {
+      this.router.navigate(['/products', id]);
+    });
+  }
 }
